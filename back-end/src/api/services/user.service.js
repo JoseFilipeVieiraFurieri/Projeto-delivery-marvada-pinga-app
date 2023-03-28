@@ -17,6 +17,26 @@ const authenticateUser = async ({ email, password }) => {
   };
 };
 
+const createUser = async ({ name, email, password }) => {
+  const convertedPassword = md5(password);
+  const [user, created] = await User.findOrCreate({
+    where: { email, name },
+    defaults: {
+      name,
+      password: convertedPassword,
+    },
+  });
+  if (!created) throw new ErrorWithStatus('Usuário já existente', 409);
+  const token = generateToken(user.dataValues);
+  return {
+    name,
+    email,
+    role: user.dataValues.role,
+    token,
+  };
+};
+
 module.exports = {
   authenticateUser,
+  createUser,
 };
