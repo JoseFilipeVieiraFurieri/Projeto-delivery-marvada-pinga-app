@@ -21,6 +21,4 @@ const ProductSchema = (sequelize, DataTypes) => {
   return ProductTable;
 }
 
-export default ProductSchema;
-
-
+module.exports = ProductSchema;

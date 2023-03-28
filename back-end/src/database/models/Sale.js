@@ -21,7 +21,7 @@ const SaleSchema = (sequelize, DataTypes) => {
       foreignKey: 'user_id',
     });
     SaleTable.belongsTo(models.User, {
-      as: 'user',
+      as: 'userSeller',
       foreignKey: 'seller_id',
     });
     SaleTable.hasMany(models.SaleProduct, {
@@ -33,6 +33,7 @@ const SaleSchema = (sequelize, DataTypes) => {
   return SaleTable;
 }
 
-export default SaleSchema;
+module.exports = SaleSchema;
+
 
 

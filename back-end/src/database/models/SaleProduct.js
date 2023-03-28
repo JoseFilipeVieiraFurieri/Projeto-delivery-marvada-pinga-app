@@ -27,4 +27,5 @@ const SaleProductSchema = (sequelize, DataTypes) => {
   return SaleProductTable;
 }
 
-export default SaleProductSchema;
+module.exports = SaleProductSchema;
+

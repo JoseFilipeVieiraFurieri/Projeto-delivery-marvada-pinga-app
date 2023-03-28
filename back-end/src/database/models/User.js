@@ -18,7 +18,7 @@ const UserSchema = (sequelize, DataTypes) => {
       foreignKey: 'user_id',
     });
     UserTable.hasMany(models.Sale, {
-      as: 'user',
+      as: 'userSeller',
       foreignKey: 'seller_id',
     });
   }
@@ -26,4 +26,4 @@ const UserSchema = (sequelize, DataTypes) => {
   return UserTable;
 }
 
-export default UserSchema;
+module.exports = UserSchema;
