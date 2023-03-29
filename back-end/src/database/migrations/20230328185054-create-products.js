@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: Sequelize.STRING,
-      price: Sequelize.FLOAT,
+      price: Sequelize.DECIMAL(4,2),
       url_image: Sequelize.STRING,
     }, {
       onDelete: 'CASCADE',
