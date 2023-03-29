@@ -13,6 +13,7 @@ function Login() {
 
   const handleUser = () => {
     localStorage.setItem('user', JSON.stringify({ email }));
+    history.push("/customer/products")
   };
 
   const handleRedirect = () => {
