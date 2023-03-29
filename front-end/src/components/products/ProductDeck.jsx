@@ -8,7 +8,7 @@ function ProductDeck() {
     const arr = Array(11).fill(1);
 
     setProtoArr([...arr]);
-  });
+  }, []);
 
   return (
     <div>
