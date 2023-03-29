@@ -7,15 +7,15 @@ function Login() {
   const { email, password } = React.useContext(AppContext);
 
   const magicNumber = 6;
-  const validInputs = email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/) && password.length > magicNumber;
+  const validInputs = email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) && password.length >= magicNumber;
 
   const handleUser = () => {
     localStorage.setItem('user', JSON.stringify({ email }));
   };
   return (
     <div>
-      <FormEmail />
-      <FormPassword />
+      <FormEmail dataTestId="common_login__input-email" />
+      <FormPassword dataTestId="common_login__input-password" />
       <button
         type="button"
         data-testid="common_login__button-login"
@@ -27,7 +27,7 @@ function Login() {
       <button
         type="button"
         data-testid="common_login__button-register"
-        onClick={ () => {}}
+        onClick={ () => {} }
       >
         Ainda não tenho conta
       </button>
