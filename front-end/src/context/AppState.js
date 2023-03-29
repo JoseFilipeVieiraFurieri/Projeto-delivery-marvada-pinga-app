@@ -6,7 +6,6 @@ function AppState({ children }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-
   const states = React.useMemo(
     () => ({
       email,
