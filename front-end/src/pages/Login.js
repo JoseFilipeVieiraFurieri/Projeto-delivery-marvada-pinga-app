@@ -5,7 +5,6 @@ import AppContext from '../context/AppContext';
 
 function Login() {
   const { email, password } = React.useContext(AppContext);
-
   const magicNumber = 6;
   const validInputs = email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) && password.length >= magicNumber;
 
