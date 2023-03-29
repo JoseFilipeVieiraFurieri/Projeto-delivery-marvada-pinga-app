@@ -5,6 +5,7 @@ import AppContext from './AppContext';
 function AppState({ children }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [name, setName] = React.useState('');
 
   const states = React.useMemo(
     () => ({
@@ -12,11 +13,14 @@ function AppState({ children }) {
       setEmail,
       password,
       setPassword,
+      name,
+      setName,
     }),
 
     [
       email,
       password,
+      name,
     ],
   );
 
