@@ -53,7 +53,7 @@ function Login() {
       </button>
       <p
         hidden={ hideDeniedLogin }
-        data-testid="common_login__element-invalid-email"
+        data-testid="common_register__element-invalid_register"
       >
         Login Inválido
       </p>

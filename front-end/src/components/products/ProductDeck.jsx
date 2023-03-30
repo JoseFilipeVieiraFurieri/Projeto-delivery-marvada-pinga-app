@@ -1,20 +1,47 @@
+import axios from 'axios';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import ProductCard from './ProductCard';
 
 function ProductDeck() {
   const [protoArr, setProtoArr] = React.useState([]);
-  const magicNumber = 11;
-  React.useEffect(() => {
-    const arr = Array(magicNumber).fill(1);
+  const [totalPrice, setTotalPrice] = React.useState(0);
+  const history = useHistory();
 
-    setProtoArr([...arr]);
+  function handleRedirect() {
+    history.push('/customer/checkout');
+  }
+
+  React.useEffect(async () => {
+    const productList = await axios.get('http://localhost:3001/products');
+
+    setProtoArr([...productList.data]);
   }, []);
 
   return (
     <div>
-      {protoArr.map((e, index) => (
-        <ProductCard id={ index + 1 } key={ index + 1 } />
+      {protoArr.map((e) => (
+        <ProductCard
+          id={ e.id }
+          key={ e.id }
+          product={ e }
+          handlePrice={ setTotalPrice }
+          totalPrice={ totalPrice }
+        />
       ))}
+
+      <button
+        type="button"
+        data-testid="customer_products__button-cart"
+        disabled={ totalPrice === 0 }
+        onClick={ handleRedirect }
+      >
+        <p data-testid="customer_products__checkout-bottom-value">
+          {String(
+            Math.round((totalPrice + Number.EPSILON) * 100) / 100,
+          ).replace('.', ',')}
+        </p>
+      </button>
     </div>
   );
 }
