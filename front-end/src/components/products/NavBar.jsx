@@ -1,6 +1,14 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 function NavBar() {
+  const [login, setLogin] = React.useState("");
+
+  React.useEffect(() => {
+    const loginInfo = JSON.parse(localStorage.getItem("user"));
+
+    setLogin(loginInfo.name);
+  }, []);
   return (
     <div>
       <li data-testid="customer_products__element-navbar-link-products">
@@ -10,7 +18,7 @@ function NavBar() {
         <Link to="">Meus Pedidos</Link>
       </li>
       <li data-testid="customer_products__element-navbar-user-full-name">
-        <Link to="">Usuário</Link>
+        <Link to="">{login}</Link>
       </li>
       <li data-testid="customer_products__element-navbar-link-logout">
         <Link to="">Sair</Link>

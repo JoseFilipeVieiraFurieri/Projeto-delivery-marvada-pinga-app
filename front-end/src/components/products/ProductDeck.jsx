@@ -13,7 +13,7 @@ function ProductDeck() {
   return (
     <div>
       {protoArr.map((e, index) => (
-        <ProductCard id={index + 1} />
+        <ProductCard id={index + 1} key={index + 1} />
       ))}
     </div>
   );

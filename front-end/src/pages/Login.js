@@ -16,10 +16,12 @@ function Login() {
     password.length >= magicNumber;
 
   const handleUser = async () => {
-    localStorage.setItem("user", JSON.stringify({ email }));
-
     try {
-      await axios.post("http://localhost:3001/user/login", { email, password });
+      const user = await axios.post("http://localhost:3001/user/login", {
+        email,
+        password,
+      });
+      localStorage.setItem("user", JSON.stringify(user.data));
       history.push("/customer/products");
     } catch (error) {
       console.log(error);
