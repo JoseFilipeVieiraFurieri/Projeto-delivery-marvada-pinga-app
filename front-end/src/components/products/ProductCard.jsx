@@ -32,7 +32,7 @@ function ProductCard(props) {
         handlePrice(totalPrice + +price);
       }
 
-      if (symbol === '-' && amount >= 0) {
+      if (symbol === '-' && amount > 0) {
         setAmout(Number(amount) - 1);
         handlePrice(totalPrice - price);
       }
@@ -88,7 +88,7 @@ ProductCard.propTypes = {
   id: PropTypes.number.isRequired,
   product: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
     urlImage: PropTypes.string.isRequired,
   }).isRequired,
 };
