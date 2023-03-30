@@ -18,11 +18,12 @@ function Register() {
 
   const handleSingIn = async () => {
     try {
-      await axios.post('http://localhost:3001/user/register', {
+      const newUser = await axios.post('http://localhost:3001/user/register', {
         email,
         password,
         name,
       });
+      localStorage.setItem("user", JSON.stringify(newUser.data));
       history.push('/customer/products');
     } catch (error) {
       console.log(error.response);
