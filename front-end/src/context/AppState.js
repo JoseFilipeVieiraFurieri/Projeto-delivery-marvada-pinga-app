@@ -6,6 +6,7 @@ function AppState({ children }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('');
+  const [type, setType] = React.useState('seller');
 
   const states = React.useMemo(
     () => ({
@@ -15,12 +16,15 @@ function AppState({ children }) {
       setPassword,
       name,
       setName,
+      type,
+      setType,
     }),
 
     [
       email,
       password,
       name,
+      type,
     ],
   );
 
