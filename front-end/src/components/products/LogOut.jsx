@@ -1,20 +1,25 @@
-import { useHistory } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 function LogOut(props) {
   const { text } = props;
 
   function handleLogout() {
-    localStorage.clear("user");
+    localStorage.clear('user');
   }
 
   return (
     <button
+      type="button"
       data-testid="customer_products__element-navbar-link-logout"
-      onClick={handleLogout}
+      onClick={ handleLogout }
     >
       {text}
     </button>
   );
 }
+
+LogOut.propTypes = {
+  text: PropTypes.string.isRequired,
+};
 
 export default LogOut;

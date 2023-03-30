@@ -1,5 +1,5 @@
-import NavBar from "../components/products/NavBar";
-import ProductDeck from "../components/products/ProductDeck";
+import NavBar from '../components/products/NavBar';
+import ProductDeck from '../components/products/ProductDeck';
 
 function Products() {
   return (

@@ -23,7 +23,7 @@ function Register() {
         password,
         name,
       });
-      localStorage.setItem("user", JSON.stringify(newUser.data));
+      localStorage.setItem('user', JSON.stringify(newUser.data));
       history.push('/customer/products');
     } catch (error) {
       console.log(error.response);

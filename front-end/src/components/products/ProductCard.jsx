@@ -60,7 +60,7 @@ function ProductCard(props) {
         +
       </button>
       <input
-        data-testid={`customer_products__input-card-quantity-${id}`}
+        data-testid={ `customer_products__input-card-quantity-${id}` }
         type="number"
         min={0}
         onChange={handleChange}
@@ -75,6 +75,9 @@ function ProductCard(props) {
     </div>
   );
 }
+ProductCard.propTypes = {
+  id: PropTypes.number.isRequired,
+};
 
 ProductCard.propTypes = {
   handlePrice: PropTypes.func.isRequired,
