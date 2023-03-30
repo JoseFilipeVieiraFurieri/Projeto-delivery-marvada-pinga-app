@@ -53,7 +53,11 @@ function Login() {
       </button>
       <p
         hidden={ hideDeniedLogin }
+<<<<<<< HEAD
         data-testid="common_login__element-invalid-email"
+=======
+        data-testid="common_register__element-invalid_register"
+>>>>>>> 729d91c (Refatoração lint dos arquivos modificados.)
       >
         Login Inválido
       </p>
