@@ -12,10 +12,12 @@ function ProductDeck() {
     history.push('/customer/checkout');
   }
 
-  React.useEffect(async () => {
-    const productList = await axios.get('http://localhost:3001/products');
-
-    setProtoArr([...productList.data]);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const productList = await axios.get('http://localhost:3001/products');
+      setProtoArr([...productList.data]);
+    };
+    fetchData();
   }, []);
 
   return (
