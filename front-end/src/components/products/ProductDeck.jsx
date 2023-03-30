@@ -1,11 +1,11 @@
-import React from "react";
-import ProductCard from "./ProductCard";
+import React from 'react';
+import ProductCard from './ProductCard';
 
 function ProductDeck() {
   const [protoArr, setProtoArr] = React.useState([]);
-
+  const magicNumber = 11;
   React.useEffect(() => {
-    const arr = Array(11).fill(1);
+    const arr = Array(magicNumber).fill(1);
 
     setProtoArr([...arr]);
   }, []);
@@ -13,7 +13,7 @@ function ProductDeck() {
   return (
     <div>
       {protoArr.map((e, index) => (
-        <ProductCard id={index + 1} key={index + 1} />
+        <ProductCard id={ index + 1 } key={ index + 1 } />
       ))}
     </div>
   );
