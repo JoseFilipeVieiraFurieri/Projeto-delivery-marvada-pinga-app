@@ -26,7 +26,7 @@ function ProductCard(props) {
   const properPrice = String(price).replace('.', ',');
 
   function handleAmount(symbol) {
-    return function () {
+    return () => {
       if (symbol === '+') {
         setAmout(Number(amount) + 1);
         handlePrice(totalPrice + +price);
