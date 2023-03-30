@@ -17,13 +17,15 @@ const authenticateUser = async ({ email, password }) => {
   };
 };
 
-const createUser = async ({ name, email, password }) => {
+const createUser = async ({ name, email, password, role }) => {
   const convertedPassword = md5(password);
+  console.log(role);
   const [user, created] = await User.findOrCreate({
     where: { email, name },
     defaults: {
       name,
       password: convertedPassword,
+      role: role || 'customer',
     },
   });
   if (!created) throw new ErrorWithStatus('Usuário já existente', 409);

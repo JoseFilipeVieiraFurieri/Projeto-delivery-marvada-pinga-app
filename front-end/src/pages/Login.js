@@ -21,7 +21,15 @@ function Login() {
         password,
       });
       localStorage.setItem('user', JSON.stringify(user.data));
-      history.push('/customer/products');
+      if (user.data.role === 'administrator') {
+        history.push('/admin/manage');
+      }
+      if (user.data.role === 'customer') {
+        history.push('/customer/products');
+      }
+      if (user.data.role === 'seller') {
+        history.push('/seller/orders');
+      }
     } catch (error) {
       console.log(error);
       setHideDeniedLogin(false);
