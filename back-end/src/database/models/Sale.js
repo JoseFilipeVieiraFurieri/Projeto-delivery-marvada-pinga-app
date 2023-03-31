@@ -6,7 +6,10 @@ const SaleSchema = (sequelize, DataTypes) => {
     totalPrice: DataTypes.FLOAT,
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
-    saleDate: DataTypes.DATE,
+    saleDate: { 
+      type: DataTypes.DATE,
+      defaultValue: Date.now(),
+    },
     status: DataTypes.STRING,
   }, {
     tableName: 'sales',
