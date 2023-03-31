@@ -38,7 +38,22 @@ const createUser = async ({ name, email, password, role }) => {
   };
 };
 
+const getUsers = async () => {
+  const allUsers = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+  return allUsers;
+};
+
+const deleteUser = async (id) => {
+  await User.destroy({
+    where: { id },
+  });
+};
+
 module.exports = {
   authenticateUser,
   createUser,
+  getUsers,
+  deleteUser,
 };

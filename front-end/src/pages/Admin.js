@@ -7,6 +7,7 @@ import FormType from '../components/Admin/FormType';
 import FormName from '../components/register/FormName';
 import NavBar from '../components/products/NavBar';
 import AppContext from '../context/AppContext';
+import AdminTable from '../components/Admin/AdminTable';
 
 function Login() {
   const [hideDeniedRegister, setHideDeniedRegister] = React.useState(true);
@@ -31,7 +32,7 @@ function Login() {
   const validInputs = email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)
   && password.length >= passwordLength && name.length >= nameLength;
 
-  const click = async () => {
+  const handleSubmit = async () => {
     const local = JSON.parse(localStorage.getItem('user'));
     try {
       await axios.post(
@@ -69,11 +70,12 @@ function Login() {
           type="button"
           data-testid="admin_manage__button-register"
           disabled={ !validInputs }
-          onClick={ click }
+          onClick={ handleSubmit }
         >
           Cadastrar
         </button>
       </div>
+      <AdminTable />
     </div>
   );
 }
