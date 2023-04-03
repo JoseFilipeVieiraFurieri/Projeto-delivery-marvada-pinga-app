@@ -1,5 +1,6 @@
-import React from "react";
-import TableItem from "./TableItem";
+import React from 'react';
+import PropTypes from 'prop-types';
+import TableItem from './TableItem';
 
 function CheckOutTable(props) {
   const { productsToCheckout, handleRemoval } = props;
@@ -16,19 +17,22 @@ function CheckOutTable(props) {
         </tr>
       </thead>
       <tbody>
-        {productsToCheckout.map((e, index) => {
-          return (
-            <TableItem
-              context={e}
-              id={index}
-              key={index}
-              handleRemoval={handleRemoval}
-            />
-          );
-        })}
+        {productsToCheckout.map((e, index) => (
+          <TableItem
+            context={ e }
+            id={ index }
+            key={ index }
+            handleRemoval={ handleRemoval }
+          />
+        ))}
       </tbody>
     </table>
   );
 }
+
+CheckOutTable.propTypes = {
+  productsToCheckout: PropTypes.shape([]).isRequired,
+  handleRemoval: PropTypes.func.isRequired,
+};
 
 export default CheckOutTable;

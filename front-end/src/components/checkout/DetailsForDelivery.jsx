@@ -11,21 +11,23 @@ function DetailsForDelivery() {
         </select>
       </label>
       <label htmlFor="address">
-        Endereço:{" "}
+        Endereço:
+        {' '}
         <input
           type="text"
           id="address"
           data-testid="customer_checkout__input-address"
-        ></input>
+        />
       </label>
 
       <label htmlFor="houseNumber">
-        Número:{" "}
+        Número:
+        {' '}
         <input
           type="number"
           id="houseNumber"
           data-testid="customer_checkout__input-address-number"
-        ></input>
+        />
       </label>
 
       <button
