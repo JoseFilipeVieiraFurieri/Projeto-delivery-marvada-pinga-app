@@ -7,14 +7,9 @@ import ProductCard from "./ProductCard";
 function ProductDeck() {
   const [protoArr, setProtoArr] = React.useState([]);
   const [totalPrice, setTotalPrice] = React.useState(0);
-  const { productsToCheckout, setProductsToCheckout } =
-    React.useContext(AppContext);
   const history = useHistory();
 
   function handleRedirect() {
-    const checkoutList = JSON.parse(localStorage.getItem("checkout"));
-    setProductsToCheckout(productsToCheckout.concat(...checkoutList));
-    console.log(productsToCheckout);
     history.push("/customer/checkout");
   }
 

@@ -1,10 +1,13 @@
+import CheckOutTable from "../components/checkout/CheckOutTable";
 import NavBar from "../components/products/NavBar";
 
 function Checkout() {
   return (
     <>
       <NavBar />
-      <div></div>
+      <div>
+        <CheckOutTable />
+      </div>
       <div></div>
     </>
   );
