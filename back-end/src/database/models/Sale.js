@@ -10,7 +10,10 @@ const SaleSchema = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       defaultValue: Date.now(),
     },
-    status: DataTypes.STRING,
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'Pendente'
+    }
   }, {
     tableName: 'sales',
     underscored: true,

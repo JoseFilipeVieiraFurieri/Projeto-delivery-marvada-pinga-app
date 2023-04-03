@@ -20,19 +20,17 @@ const getSalesById = async (id) => {
 };
 
 const createSale = async ({ totalPrice, deliveryAddress, deliveryNumber, 
-  status, userId, sellerId, quantity, productId }) => {
+  userId, sellerId, orderDetails }) => {
   const t = await sequelize.transaction();
 
   try {
     const createdSale = await Sale.create({
-      totalPrice, deliveryAddress, deliveryNumber, status, userId, sellerId,
+      totalPrice, deliveryAddress, deliveryNumber, userId, sellerId,
     });
 
-    await SaleProduct.create({
-      saleId: createdSale.id,
-      productId,
-      quantity,
-    });
+    const treatedArray = orderDetails.map((order) => ({ ...order, saleId: createdSale.id }));
+
+    await SaleProduct.bulkCreate(treatedArray);
 
     await t.commit();
 
