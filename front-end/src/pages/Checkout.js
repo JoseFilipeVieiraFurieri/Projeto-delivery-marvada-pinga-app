@@ -18,11 +18,12 @@ function Checkout() {
       <div>
         <CheckOutTable productsToCheckout={productsToCheckout} />
         <div data-testid="customer_checkout__element-order-total-price">
-          Total:{" "}
-          {`R$${productsToCheckout.reduce(
-            (sum, e) => (sum += Number(e.price * e.syncAmount)),
-            0
-          )}`}
+          {String(
+            productsToCheckout.reduce(
+              (sum, e) => (sum += Number(e.price * e.syncAmount)),
+              0
+            )
+          ).replace(".", ",")}
         </div>
       </div>
       <div>

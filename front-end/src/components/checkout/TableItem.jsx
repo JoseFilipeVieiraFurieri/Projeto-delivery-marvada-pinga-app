@@ -18,11 +18,17 @@ function TableItem(props) {
       </td>
       <td
         data-testid={`customer_checkout__element-order-table-unit-price-${id}`}
-      >{`R$${price}`}</td>
+      >
+        {String(price).replace(".", ",")}
+      </td>
       <td
         data-testid={`customer_checkout__element-order-table-sub-total-${id}`}
       >
-        {`R$${Math.round((price * syncAmount + Number.EPSILON) * 100) / 100}`}
+        {String(
+          (
+            Math.round((price * syncAmount + Number.EPSILON) * 100) / 100
+          ).toFixed(2)
+        ).replace(".", ",")}
       </td>
       <td>
         <button
