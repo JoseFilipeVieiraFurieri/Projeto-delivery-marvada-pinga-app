@@ -1,16 +1,8 @@
 import React from "react";
-import AppContext from "../../context/AppContext";
 import TableItem from "./TableItem";
 
-function CheckOutTable() {
-  const { productsToCheckout, setProductsToCheckout } =
-    React.useContext(AppContext);
-
-  React.useEffect(() => {
-    const checkoutList = JSON.parse(localStorage.getItem("checkout"));
-    setProductsToCheckout([...checkoutList]);
-  }, []);
-
+function CheckOutTable(props) {
+  const { productsToCheckout } = props;
   return (
     <table>
       <thead>
