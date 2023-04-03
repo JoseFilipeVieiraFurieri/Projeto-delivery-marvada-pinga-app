@@ -2,9 +2,11 @@ import NavBar from "../components/products/NavBar";
 
 function Checkout() {
   return (
-    <div>
+    <>
       <NavBar />
-    </div>
+      <div></div>
+      <div></div>
+    </>
   );
 }
 
