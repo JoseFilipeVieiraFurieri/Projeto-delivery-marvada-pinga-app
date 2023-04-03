@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import NavBar from '../components/products/NavBar';
@@ -15,16 +15,19 @@ function OrderDetails() {
     rowTotal: 'seller_order_details__element-order-table-sub-total-',
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const ordersList = await axios.get(`http://localhost:3001/sales/${id}`);
-      console.log(ordersList);
-      setTableData(ordersList.data);
-    };
+  const fetchData = useCallback(async () => {
+    const ordersList = await axios.get(`http://localhost:3001/sales/${id}`);
+    setTableData(ordersList.data);
+  }, [setTableData, id]);
 
+  useEffect(() => {
     fetchData();
-    console.log(tableData);
-  }, [tableData, setTableData, id]);
+  }, [tableData, setTableData, id, fetchData]);
+
+  const handleClick = async (newStatus) => {
+    await axios.patch(`http://localhost:3001/sales/${id}/${newStatus}`);
+    fetchData();
+  };
 
   return (
     <>
@@ -42,10 +45,20 @@ function OrderDetails() {
         >
           { tableData?.status }
         </p>
-        <button type="button" data-testid="seller_order_details__button-preparing-check">
+        <button
+          type="button"
+          data-testid="seller_order_details__button-preparing-check"
+          onClick={ () => handleClick('Preparando') }
+          disabled={ tableData.status !== 'Pendente' }
+        >
           Preparar Pedido
         </button>
-        <button type="button" data-testid="seller_order_details__button-dispatch-check">
+        <button
+          type="button"
+          data-testid="seller_order_details__button-dispatch-check"
+          onClick={ () => handleClick('Em Trânsito') }
+          disabled={ tableData.status !== 'Preparando' }
+        >
           Saiu para Entrega
         </button>
       </div>

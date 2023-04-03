@@ -28,4 +28,14 @@ const createSale = async (req, res) => {
   }
 };
 
-module.exports = { getSales, getSalesById, createSale };
+const updateSale = async (req, res) => {
+  try {
+    const { status, id } = req.params;
+    await SalesService.updateSale(status, id);
+    return res.status(200).json({ message: 'ok' });
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
+module.exports = { getSales, getSalesById, createSale, updateSale };
