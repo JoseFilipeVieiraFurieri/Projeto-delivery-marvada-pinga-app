@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import AppContext from '../../context/AppContext';
 import ProductCard from './ProductCard';
 
 function ProductDeck() {

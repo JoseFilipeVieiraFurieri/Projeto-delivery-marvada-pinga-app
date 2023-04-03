@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import TableItem from './TableItem';
 
 function CheckOutTable(props) {
-  const { productsToCheckout, handleRemoval } = props;
+  const { productsToCheckout } = props;
+
   return (
     <table>
       <thead>
@@ -18,12 +19,7 @@ function CheckOutTable(props) {
       </thead>
       <tbody>
         {productsToCheckout.map((e, index) => (
-          <TableItem
-            context={ e }
-            id={ index }
-            key={ index }
-            handleRemoval={ handleRemoval }
-          />
+          <TableItem context={ e } id={ index } key={ index } />
         ))}
       </tbody>
     </table>
@@ -32,7 +28,6 @@ function CheckOutTable(props) {
 
 CheckOutTable.propTypes = {
   productsToCheckout: PropTypes.shape([]).isRequired,
-  handleRemoval: PropTypes.func.isRequired,
 };
 
 export default CheckOutTable;

@@ -1,11 +1,23 @@
 import PropTypes from 'prop-types';
+import React from 'react';
+import AppContext from '../../context/AppContext';
 
 function TableItem(props) {
   const {
     context: { name, syncAmount, price },
     id,
-    handleRemoval,
   } = props;
+
+  const { setProductsToCheckout } = React.useContext(AppContext);
+
+  function handleRemoval() {
+    return function handler() {
+      const checkoutList = JSON.parse(localStorage.getItem('checkout'));
+      checkoutList.splice(id, 1);
+      localStorage.setItem('checkout', JSON.stringify(checkoutList));
+      setProductsToCheckout([...checkoutList]);
+    };
+  }
   return (
     <tr>
       <td
@@ -37,7 +49,7 @@ function TableItem(props) {
         <button
           data-testid={ `customer_checkout__element-order-table-remove-${id}` }
           type="button"
-          onClick={ handleRemoval(id) }
+          onClick={ handleRemoval() }
         >
           Remover
         </button>
@@ -52,8 +64,7 @@ TableItem.propTypes = {
     syncAmount: PropTypes.number.isRequired,
     price: PropTypes.string.isRequired,
   }).isRequired,
-  id: PropTypes.string.isRequired,
-  handleRemoval: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default TableItem;

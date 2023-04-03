@@ -46,14 +46,14 @@ function ProductCard(props) {
     let syncAmount = Number(amount);
     return () => {
       if (symbol === '+') {
-        syncAmount++;
+        syncAmount += 1;
         setAmout(Number(amount) + 1);
         handlePrice(totalPrice + +price);
         handleCheckout(syncAmount);
       }
 
       if (symbol === '-' && amount > 0) {
-        syncAmount--;
+        syncAmount -= 1;
         setAmout(Number(amount) - 1);
         handlePrice(totalPrice - +price);
         handleCheckout(syncAmount);
