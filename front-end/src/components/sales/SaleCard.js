@@ -1,9 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 function SaleCard({ id, status, deliveryAddress, deliveryNumber, saleDate, totalPrice }) {
+  const history = useHistory();
+
+  const handleClick = () => {
+    const newPath = history.location.pathname.concat(`/${id}`);
+    history.push(newPath);
+  };
+
   return (
-    <div>
+    <div onClick={ handleClick } role="presentation">
       <div>
         <p data-testid={ `seller_orders__element-order-id-${id}` }>{`Pedido ${id}`}</p>
       </div>
