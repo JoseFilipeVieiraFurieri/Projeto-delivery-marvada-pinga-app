@@ -2,6 +2,7 @@ import CheckOutTable from "../components/checkout/CheckOutTable";
 import NavBar from "../components/products/NavBar";
 import AppContext from "../context/AppContext";
 import React from "react";
+import DetailsForDelivery from "../components/checkout/DetailsForDelivery";
 
 function Checkout() {
   const { productsToCheckout, setProductsToCheckout } =
@@ -24,7 +25,10 @@ function Checkout() {
           )}`}
         </div>
       </div>
-      <div></div>
+      <div>
+        Detalhes e Endereço da Entrega:
+        <DetailsForDelivery />
+      </div>
     </>
   );
 }
