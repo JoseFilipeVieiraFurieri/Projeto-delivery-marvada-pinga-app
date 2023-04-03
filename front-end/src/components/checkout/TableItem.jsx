@@ -2,6 +2,7 @@ function TableItem(props) {
   const {
     context: { name, syncAmount, price },
     id,
+    handleRemoval,
   } = props;
   return (
     <tr>
@@ -34,6 +35,7 @@ function TableItem(props) {
         <button
           data-testid={`customer_checkout__element-order-table-remove-${id}`}
           type="button"
+          onClick={handleRemoval(id)}
         >
           Remover
         </button>

@@ -2,7 +2,7 @@ import React from "react";
 import TableItem from "./TableItem";
 
 function CheckOutTable(props) {
-  const { productsToCheckout } = props;
+  const { productsToCheckout, handleRemoval } = props;
   return (
     <table>
       <thead>
@@ -17,7 +17,14 @@ function CheckOutTable(props) {
       </thead>
       <tbody>
         {productsToCheckout.map((e, index) => {
-          return <TableItem context={e} id={index} key={index} />;
+          return (
+            <TableItem
+              context={e}
+              id={index}
+              key={index}
+              handleRemoval={handleRemoval}
+            />
+          );
         })}
       </tbody>
     </table>

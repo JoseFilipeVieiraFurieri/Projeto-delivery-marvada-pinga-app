@@ -11,12 +11,24 @@ function Checkout() {
   React.useEffect(() => {
     const checkoutList = JSON.parse(localStorage.getItem("checkout"));
     setProductsToCheckout([...checkoutList]);
-  }, []);
+  }, [setProductsToCheckout]);
+
+  function handleRemoval(id) {
+    return function handler() {
+      const checkoutList = JSON.parse(localStorage.getItem("checkout"));
+      checkoutList.splice(id, 1);
+      localStorage.setItem("checkout", JSON.stringify(checkoutList));
+      setProductsToCheckout([...checkoutList]);
+    };
+  }
   return (
     <>
       <NavBar />
       <div>
-        <CheckOutTable productsToCheckout={productsToCheckout} />
+        <CheckOutTable
+          productsToCheckout={productsToCheckout}
+          handleRemoval={handleRemoval}
+        />
         <div data-testid="customer_checkout__element-order-total-price">
           {String(
             productsToCheckout.reduce(
