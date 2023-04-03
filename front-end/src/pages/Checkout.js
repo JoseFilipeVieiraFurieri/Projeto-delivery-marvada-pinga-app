@@ -21,7 +21,7 @@ function Checkout() {
             (
               Math.round(
                 (productsToCheckout.reduce(
-                  (sum, e) => (sum += Number(e.price * e.syncAmount)),
+                  (sum, e) => (sum + Number(e.price * e.syncAmount)),
                   0,
                 )
                   + Number.EPSILON)
