@@ -12,15 +12,21 @@ function NavBar() {
   }, []);
   return (
     <div>
-      <li data-testid="customer_products__element-navbar-link-products">
-        <Link to="/produto">Produtos</Link>
-      </li>
-      <li data-testid="customer_products__element-navbar-link-orders">
-        <Link to="/pedidos">Meus Pedidos</Link>
-      </li>
-      <li data-testid="customer_products__element-navbar-user-full-name">
-        <Link to="/banana">{login}</Link>
-      </li>
+      <Link to="/customer/products">
+        <li data-testid="customer_products__element-navbar-link-products">
+          Produtos
+        </li>
+      </Link>
+      <Link to="/customer/orders">
+        <li data-testid="customer_products__element-navbar-link-orders">
+          Meus Pedidos
+        </li>
+      </Link>
+      <Link to="/">
+        <li data-testid="customer_products__element-navbar-user-full-name">
+          {login}
+        </li>
+      </Link>
       <Link to="/login">
         <li>
           <LogOut text="Sair" />
