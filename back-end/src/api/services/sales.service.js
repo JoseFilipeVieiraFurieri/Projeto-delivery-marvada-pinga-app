@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { Sale, SaleProduct } = require('../../database/models');
+const { Sale, SaleProduct, Product } = require('../../database/models');
 const config = require('../../database/config/config');
 
 const env = 'development';
@@ -11,26 +11,26 @@ const getSales = async () => {
 };
 
 const getSalesById = async (id) => {
-  const Sales = await Sale.findOne({
-    where: { id },
+  const Sales = await Sale.findByPk(id, {
+    include: [
+      { model: Product, as: 'product' },
+    ],
   });
   return Sales;
 };
 
 const createSale = async ({ totalPrice, deliveryAddress, deliveryNumber, 
-  status, userId, sellerId, quantity, productId }) => {
+  userId, sellerId, orderDetails }) => {
   const t = await sequelize.transaction();
 
   try {
     const createdSale = await Sale.create({
-      totalPrice, deliveryAddress, deliveryNumber, status, userId, sellerId,
+      totalPrice, deliveryAddress, deliveryNumber, userId, sellerId,
     });
 
-    await SaleProduct.create({
-      saleId: createdSale.id,
-      productId,
-      quantity,
-    });
+    const treatedArray = orderDetails.map((order) => ({ ...order, saleId: createdSale.id }));
+
+    await SaleProduct.bulkCreate(treatedArray);
 
     await t.commit();
 
@@ -42,4 +42,8 @@ const createSale = async ({ totalPrice, deliveryAddress, deliveryNumber,
   }
 };
 
-module.exports = { getSales, getSalesById, createSale };
+const updateSale = async (status, id) => {
+  await Sale.update({ status }, { where: { id } });
+};
+
+module.exports = { getSales, getSalesById, createSale, updateSale };

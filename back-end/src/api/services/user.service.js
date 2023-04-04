@@ -7,7 +7,7 @@ const authenticateUser = async ({ email, password }) => {
   const convertedPassword = md5(password);
   const allUsers = await User.findOne({ 
     where: { email, password: convertedPassword },
-    attributes: { exclude: ['password', 'id'] },
+    attributes: { exclude: ['password'] },
   });
   if (!allUsers) throw new ErrorWithStatus('Usuário não encontrado', 404);
   const token = generateToken(allUsers.dataValues);

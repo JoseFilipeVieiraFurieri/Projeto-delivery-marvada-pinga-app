@@ -7,6 +7,7 @@ function AppState({ children }) {
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('');
   const [type, setType] = React.useState('seller');
+  const [productsToCheckout, setProductsToCheckout] = React.useState([]);
 
   const states = React.useMemo(
     () => ({
@@ -18,6 +19,8 @@ function AppState({ children }) {
       setName,
       type,
       setType,
+      productsToCheckout,
+      setProductsToCheckout,
     }),
 
     [
@@ -25,6 +28,7 @@ function AppState({ children }) {
       password,
       name,
       type,
+      productsToCheckout,
     ],
   );
 

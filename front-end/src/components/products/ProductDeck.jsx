@@ -13,6 +13,11 @@ function ProductDeck() {
   }
 
   React.useEffect(() => {
+    const checkoutEntry = JSON.parse(localStorage.getItem('checkout'));
+    if (!checkoutEntry) {
+      localStorage.setItem('checkout', JSON.stringify([]));
+    }
+
     const fetchData = async () => {
       const productList = await axios.get('http://localhost:3001/products');
       setProtoArr([...productList.data]);
@@ -39,9 +44,12 @@ function ProductDeck() {
         onClick={ handleRedirect }
       >
         <p data-testid="customer_products__checkout-bottom-value">
-          {String(
-            Math.round((totalPrice + Number.EPSILON) * 100) / 100,
-          ).replace('.', ',')}
+          {new Intl.NumberFormat(
+            'pt-BR',
+            { minimumFractionDigits: 2, maximumFractionDigits: 2 },
+          )
+            .format(Math.round((totalPrice + Number.EPSILON) * 100) / 100)
+            .replace('.', ',')}
         </p>
       </button>
     </div>

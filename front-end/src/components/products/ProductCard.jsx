@@ -9,16 +9,33 @@ function ProductCard(props) {
     product: { name, price, urlImage },
   } = props;
 
+  React.useEffect(() => {
+    localStorage.setItem('checkout', JSON.stringify([]));
+  }, []);
+
+  function handleCheckout(syncAmount) {
+    const product = { name, syncAmount, price, id };
+    const checkoutList = JSON.parse(localStorage.getItem('checkout'));
+    if (checkoutList.find((e) => e.name === product.name)) {
+      const indexOfProduct = checkoutList.findIndex(
+        (e) => e.name === product.name,
+      );
+      checkoutList.splice(indexOfProduct, 1);
+    }
+    if (syncAmount > 0) checkoutList.push(product);
+    localStorage.setItem('checkout', JSON.stringify(checkoutList));
+  }
+
   function handleChange(e) {
     const oldPrice = +amount * price;
     const newPrice = +e.target.value * price;
-    console.log('Old price: ', oldPrice);
-    console.log('New price: ', newPrice);
 
     if (e.target.value > amount) {
       handlePrice(totalPrice + (newPrice - oldPrice));
+      handleCheckout(Number(e.target.value));
     } else {
       handlePrice(totalPrice - (oldPrice - newPrice));
+      handleCheckout(Number(e.target.value));
     }
     setAmout(e.target.value);
   }
@@ -26,15 +43,20 @@ function ProductCard(props) {
   const properPrice = String(price).replace('.', ',');
 
   function handleAmount(symbol) {
+    let syncAmount = Number(amount);
     return () => {
       if (symbol === '+') {
+        syncAmount += 1;
         setAmout(Number(amount) + 1);
         handlePrice(totalPrice + +price);
+        handleCheckout(syncAmount);
       }
 
       if (symbol === '-' && amount > 0) {
+        syncAmount -= 1;
         setAmout(Number(amount) - 1);
-        handlePrice(totalPrice - price);
+        handlePrice(totalPrice - +price);
+        handleCheckout(syncAmount);
       }
     };
   }

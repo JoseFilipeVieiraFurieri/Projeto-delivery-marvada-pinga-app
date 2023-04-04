@@ -9,7 +9,7 @@ import NavBar from '../components/products/NavBar';
 import AppContext from '../context/AppContext';
 import AdminTable from '../components/Admin/AdminTable';
 
-function Login() {
+function Admin() {
   const [hideDeniedRegister, setHideDeniedRegister] = React.useState(true);
   const {
     email,
@@ -80,4 +80,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Admin;
