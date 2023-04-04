@@ -40,6 +40,14 @@ function Login() {
     history.push('/register');
   };
 
+  React.useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+
+    if (userData) {
+      history.push('/customer/products');
+    }
+  }, []);
+
   return (
     <div>
       <FormEmail dataTestId="common_login__input-email" />
