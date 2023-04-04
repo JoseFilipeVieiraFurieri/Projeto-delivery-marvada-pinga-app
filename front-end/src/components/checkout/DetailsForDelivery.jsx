@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function DetailsForDelivery() {
@@ -37,12 +37,12 @@ function DetailsForDelivery() {
     }
   };
 
-  const getSellers = async () => {
+  const getSellers = useCallback(async () => {
     const { data } = await axios.get('http://localhost:3001/user');
     const filteredData = data.filter((user) => user.role === 'seller');
     setSellers(filteredData);
     setSellerId(filteredData[0].id);
-  };
+  }, [setSellerId, setSellers]);
 
   useEffect(() => {
     getSellers();

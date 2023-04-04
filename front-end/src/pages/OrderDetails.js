@@ -38,7 +38,7 @@ function OrderDetails() {
           {`Pedido ${tableData?.id}`}
         </p>
         <p data-testid="seller_order_details__element-order-details-label-order-date">
-          { tableData?.saleDate }
+          { new Date(tableData?.saleDate).toLocaleDateString('pt-BR') }
         </p>
         <p
           data-testid="seller_order_details__element-order-details-label-delivery-status"
@@ -97,7 +97,7 @@ function OrderDetails() {
         </tbody>
         <div>
           <p data-testid="seller_order_details__element-order-total-price">
-            {`Total: R$ ${tableData?.totalPrice}`}
+            { String(tableData?.totalPrice).replace('.', ',') }
           </p>
         </div>
       </table>
