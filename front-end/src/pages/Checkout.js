@@ -11,24 +11,17 @@ function Checkout() {
     const checkoutList = JSON.parse(localStorage.getItem('checkout'));
     setProductsToCheckout([...checkoutList]);
   }, [setProductsToCheckout]);
+
   return (
     <>
       <NavBar />
       <div>
         <CheckOutTable productsToCheckout={ productsToCheckout } />
         <div data-testid="customer_checkout__element-order-total-price">
-          {String(
-            (
-              Math.round(
-                (productsToCheckout.reduce(
-                  (sum, e) => (sum + Number(e.price * e.syncAmount)),
-                  0,
-                )
-                  + Number.EPSILON)
-                  * 100,
-              ) / 100
-            ).toFixed(2),
-          ).replace('.', ',')}
+          {(Math.round((productsToCheckout.reduce(
+            (sum, e) => (sum + (Number(e.price) * e.syncAmount)),
+            0,
+          ) * 100)) / 100).toFixed(2).replace('.', ',')}
         </div>
       </div>
       <div>

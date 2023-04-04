@@ -14,7 +14,7 @@ function ProductCard(props) {
   }, []);
 
   function handleCheckout(syncAmount) {
-    const product = { name, syncAmount, price };
+    const product = { name, syncAmount, price, id };
     const checkoutList = JSON.parse(localStorage.getItem('checkout'));
     if (checkoutList.find((e) => e.name === product.name)) {
       const indexOfProduct = checkoutList.findIndex(

@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
       },
-      total_price: Sequelize.FLOAT,
+      total_price: Sequelize.DECIMAL(5, 2),
       delivery_address: Sequelize.STRING,
       delivery_number: Sequelize.STRING,
       sale_date: Sequelize.DATE,
