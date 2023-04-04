@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import NavBar from '../components/products/NavBar';
+import OrderTable from '../components/global/OrderTable';
 
 function OrderDetails() {
   const { id } = useParams();
@@ -13,6 +14,7 @@ function OrderDetails() {
     rowQuantity: 'seller_order_details__element-order-table-quantity-',
     rowUnit: 'seller_order_details__element-order-table-unit-price-',
     rowTotal: 'seller_order_details__element-order-table-sub-total-',
+    total: 'seller_order_details__element-order-total-price',
   };
 
   const fetchData = useCallback(async () => {
@@ -62,45 +64,10 @@ function OrderDetails() {
           Saiu para Entrega
         </button>
       </div>
-      <table>
-        <thead>
-          <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Sub-total</th>
-        </thead>
-        <tbody>
-          {
-            tableData.product?.map((data, i) => (
-              <tr key={ data.id }>
-                <td
-                  data-testid={ `${testId.rowIndex}${i}` }
-                >
-                  {i + 1}
-                </td>
-                <td data-testid={ `${testId.rowName}${i}` }>
-                  { data.name }
-                </td>
-                <td data-testid={ `${testId.rowQuantity}${i}` }>
-                  {data.SaleProduct.quantity}
-                </td>
-                <td data-testid={ `${testId.rowUnit}${i}` }>
-                  { data.price }
-                </td>
-                <td data-testid={ `${testId.rowTotal}${i}` }>
-                  { Number(data.price) * data.SaleProduct.quantity }
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-        <div>
-          <p data-testid="seller_order_details__element-order-total-price">
-            { String(tableData?.totalPrice).replace('.', ',') }
-          </p>
-        </div>
-      </table>
+      <OrderTable
+        testId={ testId }
+        tableData={ tableData }
+      />
     </>
   );
 }
