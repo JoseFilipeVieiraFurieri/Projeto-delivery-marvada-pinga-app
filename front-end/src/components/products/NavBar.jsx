@@ -4,12 +4,15 @@ import LogOut from './LogOut';
 
 function NavBar() {
   const [login, setLogin] = React.useState('');
+  const [role, setRole] = React.useState('');
 
   React.useEffect(() => {
     const loginInfo = JSON.parse(localStorage.getItem('user'));
 
+    setRole(loginInfo.role);
     setLogin(loginInfo.name);
   }, []);
+
   return (
     <div>
       <Link to="/customer/products">
@@ -17,7 +20,7 @@ function NavBar() {
           Produtos
         </li>
       </Link>
-      <Link to="/customer/orders">
+      <Link to={ `/${role}/orders` }>
         <li data-testid="customer_products__element-navbar-link-orders">
           Meus Pedidos
         </li>

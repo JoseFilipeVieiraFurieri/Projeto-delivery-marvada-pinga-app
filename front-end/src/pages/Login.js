@@ -46,7 +46,7 @@ function Login() {
     if (userData) {
       history.push('/customer/products');
     }
-  }, []);
+  }, [history]);
 
   return (
     <div>

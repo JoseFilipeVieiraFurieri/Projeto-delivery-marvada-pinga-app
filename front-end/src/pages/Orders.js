@@ -13,7 +13,7 @@ function Orders() {
 
   React.useEffect(() => {
     fetchData();
-  }, [setClientOrders]);
+  }, [setClientOrders, fetchData]);
 
   return (
     <div>
