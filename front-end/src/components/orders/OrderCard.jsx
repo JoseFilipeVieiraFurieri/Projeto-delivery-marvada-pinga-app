@@ -5,7 +5,7 @@ function OrderCard(props) {
   const { clientOrder } = props;
   console.log(clientOrder);
   return (
-    <Link to={ `customer/orders/${clientOrder.id}` }>
+    <Link to={ `/customer/orders/${clientOrder.id}` }>
       <div
         data-testid={ `customer_orders__element-order-id-${clientOrder.id}` }
       >
