@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { Sale, SaleProduct, Product } = require('../../database/models');
+const { Sale, SaleProduct, Product, User } = require('../../database/models');
 const config = require('../../database/config/config');
 
 const env = 'development';
@@ -14,6 +14,7 @@ const getSalesById = async (id) => {
   const Sales = await Sale.findByPk(id, {
     include: [
       { model: Product, as: 'product' },
+      { model: User, as: 'userSeller' },
     ],
   });
   return Sales;
