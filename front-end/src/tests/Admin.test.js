@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
@@ -39,6 +39,7 @@ describe('Admin test suites', () => {
     const nameInput = screen.getByTestId(NAME_TEST_ID);
     const emailInput = screen.getByTestId(EMAIL_TEST_ID);
     const passwordInput = screen.getByTestId(PASSWORD_TEST_ID);
+    const roleDropdown = screen.getByTestId(DROPDOWN_TEST_ID);
     const registerBtn = screen.getByTestId(REGISTER_BTN_TEST_ID);
 
     axios.post.mockResolvedValueOnce();
@@ -46,6 +47,7 @@ describe('Admin test suites', () => {
     userEvent.type(nameInput, 'João Gomes Correa da Silva');
     userEvent.type(emailInput, 'joao@gomes.com');
     userEvent.type(passwordInput, '123456@joao');
+    fireEvent.change(roleDropdown, { target: { value: 'customer' }});
     await act(async () => userEvent.click(registerBtn));
   });
 

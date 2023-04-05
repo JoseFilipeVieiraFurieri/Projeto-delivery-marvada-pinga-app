@@ -34,6 +34,7 @@ function ProductCard(props) {
       handlePrice(totalPrice + (newPrice - oldPrice));
       handleCheckout(Number(e.target.value));
     } else {
+      console.log('aa');
       handlePrice(totalPrice - (oldPrice - newPrice));
       handleCheckout(Number(e.target.value));
     }

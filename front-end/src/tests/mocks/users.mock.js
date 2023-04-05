@@ -30,5 +30,11 @@ export const allUsers = {
       email: 'zebirita@email.com',
       role: 'customer',
     },
+    {
+      id: 4,
+      name: 'Vendedor do Ze Birita',
+      email: 'zebirita@vendas.com',
+      role: 'seller',
+    },
   ],
 };
