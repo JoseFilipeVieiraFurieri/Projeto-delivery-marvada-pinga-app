@@ -1,26 +1,7 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-function AdminTable() {
-  const [tableData, setTableData] = useState([]);
-
-  const fetchData = async () => {
-    const usersList = await axios.get('http://localhost:3001/user');
-    setTableData(usersList.data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [tableData, setTableData]);
-
-  const handleDelete = async (id) => {
-    const local = JSON.parse(localStorage.getItem('user'));
-    await axios.delete(`http://localhost:3001/user/${id}`, {
-      headers: { authorization: local.token },
-    });
-    fetchData();
-  };
-
+function AdminTable({ handleDelete, tableData }) {
   return (
     <table>
       <thead>
@@ -59,5 +40,10 @@ function AdminTable() {
     </table>
   );
 }
+
+AdminTable.propTypes = {
+  handleDelete: PropTypes.func.isRequired,
+  tableData: PropTypes.shape([]).isRequired,
+};
 
 export default AdminTable;
