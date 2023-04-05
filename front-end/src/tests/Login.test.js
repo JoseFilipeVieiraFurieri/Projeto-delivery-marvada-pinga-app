@@ -1,14 +1,12 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
+import { act } from 'react-dom/test-utils';
 
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
 import Login from '../pages/Login';
-import App from '../App';
 import { adminUser, sellerUser, customerUser } from './mocks/users.mock';
-import { singleFetch } from './helpers/mockFetch';
-import { act } from 'react-dom/test-utils';
 
 const EMAIL_TEST_ID = 'common_login__input-email';
 const PASSWORD_TEST_ID = 'common_login__input-password';
@@ -88,7 +86,7 @@ describe('Login test suites', () => {
   });
 
   it('should render an error message if the user doesn\'t exist', async () => {
-    const { history } = renderWithRouterAndProvider(<Login />);
+    renderWithRouterAndProvider(<Login />);
 
     axios.post.mockImplementation(new Error('invalid login'));
 
