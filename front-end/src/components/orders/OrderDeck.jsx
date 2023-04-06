@@ -3,7 +3,6 @@ import OrderCard from './OrderCard';
 
 function OrderDeck(props) {
   const { clientOrders } = props;
-  console.log(clientOrders);
   return (
     <>
       {clientOrders.map((e) => (

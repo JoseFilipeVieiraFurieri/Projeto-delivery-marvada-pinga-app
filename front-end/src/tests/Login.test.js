@@ -7,6 +7,7 @@ import { act } from 'react-dom/test-utils';
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
 import Login from '../pages/Login';
 import { adminUser, sellerUser, customerUser } from './mocks/users.mock';
+import App from '../App';
 
 const EMAIL_TEST_ID = 'common_login__input-email';
 const PASSWORD_TEST_ID = 'common_login__input-password';
@@ -26,9 +27,9 @@ describe('Login test suites', () => {
   });
 
   it('should redirect a user to the register page when asked to', () => {
-    const { history } = renderWithRouterAndProvider(<Login />);
+    const { history } = renderWithRouterAndProvider(<App />);
 
-    expect(history.location.pathname).toBe('/');
+    expect(history.location.pathname).toBe('/login');
 
     const registerBtn = screen.getByTestId(REGISTER_BTN_TEST_ID);
 

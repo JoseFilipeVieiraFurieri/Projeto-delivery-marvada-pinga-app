@@ -9,6 +9,8 @@ import Products from '../pages/Products';
 import Checkout from '../pages/Checkout';
 import { allUsers, customerUser } from './mocks/users.mock';
 import products from './mocks/products.mocks';
+import CheckoutDetails from '../pages/CheckoutDetails';
+import { singleSale } from './mocks/sales.mocks';
 
 const ADD_BTN_TEST_ID = 'customer_products__button-card-add-item-1';
 const QUANTITY_INPUT_TEST_ID = 'customer_products__input-card-quantity-1';
@@ -30,7 +32,6 @@ describe('Product test suites', () => {
     axios.get.mockResolvedValueOnce(products);
 
     await act(async () => renderWithRouterAndProvider(<Products />, '/customer/products'));
-    // const { history } = renderWithRouterAndProvider(<Products />, '/customer/products');
 
     const quantityInput = screen.getByTestId(QUANTITY_INPUT_TEST_ID);
     const secondQuantityInput = screen.getByTestId('customer_products__input-card-quantity-2');
@@ -59,11 +60,32 @@ describe('Product test suites', () => {
 
 
     userEvent.click(rmItemBtn);
-    fireEvent.change(userDropdown, { target: { value: '1' } });
+    fireEvent.change(userDropdown, { target: { value: '4' } });
     userEvent.type(addressInput, 'Rua da margura');
     userEvent.type(addressNumber, '300');
+    axios.post.mockResolvedValue(singleSale);
     await act(async () => userEvent.click(finishOrderBtn));
   });
+
+  it('should throw an error when the number is invalid', async () => {
+    axios.get.mockResolvedValueOnce(allUsers);
+    await act(async () => renderWithRouterAndProvider(<Checkout />, '/customer/checkout'));
+    // checkout tests
+
+    const userDropdown = screen.getByTestId(CHECKOUT_DROPDOWN_TEST_ID);
+    const addressInput = screen.getByTestId(ADDRESS_INPUT_TEST_ID);
+    const addressNumber = screen.getByTestId(ADDRESS_NUMBER_INPUT_TEST_ID);
+    const finishOrderBtn = screen.getByTestId(FINISH_ORDER_BTN_TEST_ID);
+    const rmItemBtn = screen.getByTestId(RM_ITEM_BTN_TEST_ID);
+
+
+    userEvent.click(rmItemBtn);
+    fireEvent.change(userDropdown, { target: { value: '4' } });
+    userEvent.type(addressInput, 'Rua da margura');
+    userEvent.type(addressNumber, 'sabão');
+    axios.post.mockImplementation(new Error('inválido'));
+    await act(async () => userEvent.click(finishOrderBtn));
+  })
 
   it('should be able to interact with the quantity if there are items already and logout', async () => {
     localStorage.setItem('user', JSON.stringify(customerUser));
