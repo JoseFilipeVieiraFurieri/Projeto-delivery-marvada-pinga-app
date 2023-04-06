@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 function OrderCard(props) {
   const { clientOrder } = props;
-  console.log(clientOrder);
   return (
     <Link to={ `/customer/orders/${clientOrder.id}` }>
       <div

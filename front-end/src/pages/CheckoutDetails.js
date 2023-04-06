@@ -20,12 +20,13 @@ function CheckoutDetails() {
 
   const fetchData = useCallback(async () => {
     const ordersList = await axios.get(`http://localhost:3001/sales/${id}`);
+    console.log(ordersList);
     setTableData(ordersList.data);
   }, [setTableData, id]);
 
   useEffect(() => {
     fetchData();
-  }, [tableData, setTableData, id, fetchData]);
+  }, [setTableData, id, fetchData]);
 
   const handleClick = async (newStatus) => {
     await axios.patch(`http://localhost:3001/sales/${id}/${newStatus}`);

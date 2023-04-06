@@ -20,6 +20,25 @@ function Admin() {
     type,
   } = React.useContext(AppContext);
 
+  const [tableData, setTableData] = React.useState([]);
+
+  const fetchData = async () => {
+    const usersList = await axios.get('http://localhost:3001/user');
+    setTableData(usersList.data);
+  };
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleDelete = async (id) => {
+    const local = JSON.parse(localStorage.getItem('user'));
+    await axios.delete(`http://localhost:3001/user/${id}`, {
+      headers: { authorization: local.token },
+    });
+    fetchData();
+  };
+
   React.useEffect(() => {
     setEmail('');
     setPassword('');
@@ -46,6 +65,7 @@ function Admin() {
           headers: { authorization: local.token },
         },
       );
+      fetchData();
     } catch (error) {
       console.log(error);
       setHideDeniedRegister(false);
@@ -74,7 +94,10 @@ function Admin() {
           Cadastrar
         </button>
       </div>
-      <AdminTable />
+      <AdminTable
+        tableData={ tableData }
+        handleDelete={ handleDelete }
+      />
     </div>
   );
 }

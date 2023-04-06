@@ -24,7 +24,7 @@ function OrderDetails() {
 
   useEffect(() => {
     fetchData();
-  }, [tableData, setTableData, id, fetchData]);
+  }, [setTableData, id, fetchData]);
 
   const handleClick = async (newStatus) => {
     await axios.patch(`http://localhost:3001/sales/${id}/${newStatus}`);
